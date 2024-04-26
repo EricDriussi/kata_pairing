@@ -6,7 +6,7 @@ namespace FizzBuzz.GOL;
 
 public class Board
 {
-    private Cell[,] board;
+    private readonly Cell[,] board;
 
     public Board(int x, int y)
     {
@@ -22,6 +22,16 @@ public class Board
     {
         return board[x, y];
     }
+
+    public int GetWidth()
+    {
+        return board.GetLength(0);
+    }
+
+    public int GetHeight()
+    {
+        return board.GetLength(1);
+    }
 }
 
 public class Cell
@@ -36,5 +46,10 @@ public class Cell
     public bool IsAlive()
     {
         return alive;
+    }
+
+    public void Died()
+    {
+        this.alive = false;
     }
 }

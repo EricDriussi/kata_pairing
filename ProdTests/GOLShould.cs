@@ -51,10 +51,30 @@ public class GOLShould
     public void AnyLiveCellWithFewerThanTwoLiveNeighboursDies()
     {
         var board = new Board(10, 10);
+        var game= new Game(board);
         board.SetCell(5, 5, new Cell(true));
 
-        Game.play(board);
+        game.NextGen();
 
         Assert.False(board.GetCell(5, 5).IsAlive());
     }
+
+    [Fact]
+    public void AnyLiveCellWithTwoOrMoreLiveNeighboursLives()
+    {
+        var board = new Board(3, 3);
+        var game= new Game(board);
+        var cellToTest = new Cell(true);
+
+        board.SetCell(0, 1, new Cell(true));
+        board.SetCell(1, 1, cellToTest);
+        board.SetCell(2, 1, new Cell(true));
+
+        game.NextGen();
+
+        Assert.True(cellToTest.IsAlive());
+    }
+
+
 }
+
